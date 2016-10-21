@@ -239,8 +239,8 @@ private slots:
 	void editBend();
     /// Adds or removes a trill for the current note.
     void editTrill();
-    /// Adds or removes finger info for the current note.
-    void editFinger();
+    /// Adds or removes left-hand finger info for the current note.
+    void editFingerLeft();
     
     /// Adds a new player to the score.
     void addPlayer();
@@ -573,17 +573,6 @@ private:
     Command *myArpeggioDownCommand;
 
     Command *myFingerCommand;
-//    QMenu *myFingerMenu;
-//    Command *myFingerNoneCommand;
-//    Command *myFinger1Command;
-//    Command *myFinger2Command;
-//    Command *myFinger3Command;
-//    Command *myFinger4Command;
-//    Command *myFingerTCommand;
-//    Command *myFingerPCommand;
-//    Command *myFingerICommand;
-//    Command *myFingerMCommand;
-//    Command *myFingerACommand;
 
     QMenu *myPlayerMenu;
     Command *myAddPlayerCommand;

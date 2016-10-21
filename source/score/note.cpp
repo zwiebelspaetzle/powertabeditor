@@ -40,7 +40,7 @@ Note::Note()
     : myString(0),
       myFretNumber(0),
       myTrilledFret(-1),
-      myFinger(0),
+      myFingerLeft(FL_NotSpecified),
       myTappedHarmonicFret(-1)
 {
 }
@@ -49,7 +49,7 @@ Note::Note(int string, int fretNumber)
     : myString(string),
       myFretNumber(fretNumber),
       myTrilledFret(-1),
-      myFinger(0),
+      myFingerLeft(FL_NotSpecified),
       myTappedHarmonicFret(-1)
 {
 }
@@ -59,10 +59,10 @@ bool Note::operator==(const Note &other) const
     return myString == other.myString && myFretNumber == other.myFretNumber &&
            mySimpleProperties == other.mySimpleProperties &&
            myTrilledFret == other.myTrilledFret &&
-           myFinger == other.myFinger &&
            myTappedHarmonicFret == other.myTappedHarmonicFret &&
            myArtificialHarmonic == other.myArtificialHarmonic &&
-           myBend == other.myBend;
+           myBend == other.myBend &&
+           myFingerLeft == other.myFingerLeft;
 }
 
 int Note::getString() const
@@ -151,38 +151,6 @@ void Note::clearTrill()
     myTrilledFret = -1;
 }
 
-
-
-
-
-bool Note::hasFinger() const
-{
-    return myFinger != 0;
-}
-int Note::getFinger() const
-{
-    if (!hasFinger())
-//        throw std::logic_error("Note does not have finger");
-        return 0;
-        
-    return myFinger;
-}
-
-void Note::setFinger(int finger)
-{
-    myFinger = finger;
-}
-
-void Note::clearFinger()
-{
-    myFinger = 0;
-}
-
-
-
-
-
-
 bool Note::hasTappedHarmonic() const
 {
     return myTappedHarmonicFret != -1;
@@ -247,6 +215,29 @@ void Note::setBend(const Bend &bend)
 void Note::clearBend()
 {
     myBend.reset();
+}
+
+bool Note::hasFingerLeft() const
+{
+    return myFingerLeft != FL_NotSpecified;
+}
+
+Note::FingerLeft Note::getFingerLeft() const
+{
+    if (!hasFingerLeft())
+        return FL_NotSpecified;
+    
+    return myFingerLeft;
+}
+
+void Note::setFingerLeft(FingerLeft fingerLeft)
+{
+    myFingerLeft = fingerLeft;
+}
+
+void Note::clearFingerLeft()
+{
+    myFingerLeft = FL_NotSpecified;
 }
 
 std::ostream &operator<<(std::ostream &os, const Note &note)

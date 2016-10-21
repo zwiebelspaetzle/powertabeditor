@@ -77,13 +77,13 @@ public:
     }
 };
 
-class AddFinger : public AddSpecialNoteProperty<int>
+class AddFingerLeft : public AddSpecialNoteProperty<Note::FingerLeft>
 {
 public:
-    AddFinger(const ScoreLocation &location, int finger)
-    : AddSpecialNoteProperty<int>(location, QObject::tr("Add Finger"), finger,
-                                  std::mem_fn(&Note::setFinger),
-                                  std::mem_fn(&Note::clearFinger))
+    AddFingerLeft(const ScoreLocation &location, Note::FingerLeft fingerLeft)
+    : AddSpecialNoteProperty<Note::FingerLeft>(location, QObject::tr("Add Finger Left"), fingerLeft,
+                                  std::mem_fn(&Note::setFingerLeft),
+                                  std::mem_fn(&Note::clearFingerLeft))
     {
     }
 };
