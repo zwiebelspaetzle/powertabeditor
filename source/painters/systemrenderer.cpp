@@ -1451,6 +1451,35 @@ void SystemRenderer::drawStdNotation(const System &system, const Staff &staff,
             }
         }
 
+        Note::FingerLeft myFL = note.getFingerLeft();
+        if (myFL != Note::FingerLeft::FL_NotSpecified)
+        {
+            QChar myFLChar;
+            switch (myFL) {
+                case Note::FingerLeft::FL_1:
+                    myFLChar = QChar('1');
+                    break;
+                case Note::FingerLeft::FL_2:
+                    myFLChar = QChar('2');
+                    break;
+                case Note::FingerLeft::FL_3:
+                    myFLChar = QChar('3');
+                    break;
+                case Note::FingerLeft::FL_4:
+                    myFLChar = QChar('4');
+                    break;
+                case Note::FingerLeft::FL_T:
+                    myFLChar = QChar('T');
+                    break;
+            }
+            group = new QGraphicsItemGroup();
+            const double flX = noteHeadWidth + 2;
+            
+            auto flNumText = new SimpleTextItem(myFLChar, *font);
+            flNumText->setPos(flX, 0);
+            group->addToGroup(flNumText);
+        }
+        
         if (group)
         {
             group->addToGroup(text);

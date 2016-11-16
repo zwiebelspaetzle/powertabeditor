@@ -64,6 +64,7 @@ public:
     QString getAccidentalText() const;
     bool isDotted() const;
     bool isDoubleDotted() const;
+    Note::FingerLeft getFingerLeft() const;
 
     /// Remove the note's accidental.
     void clearAccidental();
