@@ -1410,6 +1410,7 @@ void SystemRenderer::drawStdNotation(const System &system, const Staff &staff,
 
     QFont default_font(MusicFont::getFont(MusicFont::DEFAULT_FONT_SIZE));
     QFont grace_font(MusicFont::getFont(MusicFont::GRACE_NOTE_SIZE));
+    QFont finger_font(MusicFont::getFont(MusicFont::FINGER_FONT_SIZE));
     QFontMetricsF default_fm(default_font);
     QFontMetricsF grace_fm(grace_font);
 
@@ -1417,7 +1418,8 @@ void SystemRenderer::drawStdNotation(const System &system, const Staff &staff,
     {
         const QFont *font = note.isGraceNote() ? &grace_font : &default_font;
         const QFontMetricsF *fm = note.isGraceNote() ? &grace_fm : &default_fm;
-
+        const QFont *fingerFont = &finger_font;
+        
         const QChar noteHead = note.getNoteHeadSymbol();
         const double noteHeadWidth = fm->width(noteHead);
 
@@ -1471,12 +1473,16 @@ void SystemRenderer::drawStdNotation(const System &system, const Staff &staff,
                 case Note::FingerLeft::FL_T:
                     myFLChar = QChar('T');
                     break;
+                default:
+                    break;
             }
-            group = new QGraphicsItemGroup();
-            const double flX = noteHeadWidth + 2;
             
-            auto flNumText = new SimpleTextItem(myFLChar, *font);
-            flNumText->setPos(flX, 0);
+            if (!group) {
+                group = new QGraphicsItemGroup();
+            }
+            
+            auto flNumText = new SimpleTextItem(myFLChar, *fingerFont);
+            flNumText->setPos(0, 10);
             group->addToGroup(flNumText);
         }
         
