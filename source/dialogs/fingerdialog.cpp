@@ -24,8 +24,7 @@
 
 FingerDialog::FingerDialog(QWidget *parent, Note::FingerLeft fingerLeft)
 : QDialog(parent),
-ui(new Ui::FingerDialog),
-myFingerLeft(fingerLeft)
+ui(new Ui::FingerDialog)
 {
     ui->setupUi(this);
     ui->fingerLeftComboBox->setCurrentIndex(fingerLeft);

@@ -40,7 +40,6 @@ public:
     
 private:
     Ui::FingerDialog *ui;
-    const Note::FingerLeft myFingerLeft;
 };
 
 #endif

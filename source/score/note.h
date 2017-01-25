@@ -240,7 +240,7 @@ void Note::serialize(Archive &ar, const FileVersion /*version*/)
     ar("fret", myFretNumber);
     ar("properties", mySimpleProperties);
     ar("trill", myTrilledFret);
-    ar("fingerLeft", myFingerLeft);
+    ar("finger_left", myFingerLeft);
     ar("tapped_harmonic", myTappedHarmonicFret);
     ar("artificial_harmonic", myArtificialHarmonic);
     ar("bend", myBend);

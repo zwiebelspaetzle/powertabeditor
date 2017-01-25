@@ -2448,9 +2448,9 @@ void PowerTabEditor::createCommands()
                               Note::SlideOutOfUpwards);
     
     myFingerCommand = new Command(tr("Finger..."), "TabSymbols.Finger",
-                                  QKeySequence(tr("Shift+F")), this);
+                                  QKeySequence(Qt::SHIFT + Qt::Key_F), this);
     myFingerCommand->setCheckable(true);
-    connect(myFingerCommand, SIGNAL(triggered()), this, SLOT(editFingerLeft()));
+    connect(myFingerCommand, &QAction::triggered, this, &PowerTabEditor::editFingerLeft);
 
     // Player menu.
     myAddPlayerCommand =

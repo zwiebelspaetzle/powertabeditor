@@ -1430,25 +1430,25 @@ void SystemRenderer::drawStdNotation(const System &system, const Staff &staff,
             }
         }
 
-        Note::FingerLeft myFL = note.getFingerLeft();
-        if (myFL != Note::FingerLeft::FL_NotSpecified)
+        Note::FingerLeft fingerLeft = note.getFingerLeft();
+        if (fingerLeft != Note::FingerLeft::FL_NotSpecified)
         {
-            QChar myFLChar;
-            switch (myFL) {
+            QChar flChar;
+            switch (fingerLeft) {
                 case Note::FingerLeft::FL_1:
-                    myFLChar = QChar('1');
+                    flChar = QChar('1');
                     break;
                 case Note::FingerLeft::FL_2:
-                    myFLChar = QChar('2');
+                    flChar = QChar('2');
                     break;
                 case Note::FingerLeft::FL_3:
-                    myFLChar = QChar('3');
+                    flChar = QChar('3');
                     break;
                 case Note::FingerLeft::FL_4:
-                    myFLChar = QChar('4');
+                    flChar = QChar('4');
                     break;
                 case Note::FingerLeft::FL_T:
-                    myFLChar = QChar('T');
+                    flChar = QChar('T');
                     break;
                 default:
                     break;
@@ -1458,7 +1458,7 @@ void SystemRenderer::drawStdNotation(const System &system, const Staff &staff,
                 group = new QGraphicsItemGroup();
             }
             
-            auto flNumText = new SimpleTextItem(myFLChar, *fingerFont);
+            auto flNumText = new SimpleTextItem(flChar, finger_font);
             flNumText->setPos(0, 10);
             group->addToGroup(flNumText);
         }
