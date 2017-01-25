@@ -86,6 +86,7 @@ public:
 
     static const int DEFAULT_FONT_SIZE = 22;
     static const int GRACE_NOTE_SIZE = 15;
+    static const int FINGER_FONT_SIZE = 10;
 
     static QFont getFont(int pixel_size);
 };

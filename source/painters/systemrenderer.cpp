@@ -338,7 +338,7 @@ void SystemRenderer::drawTabNotes(const Staff &staff,
                     QPen(note.hasProperty(Note::Tied) ? Qt::lightGray
                                                       : Qt::black),
                     QBrush(QColor(255, 255, 255)));
-
+                
                 centerHorizontally(*tabNote, location,
                                    location + layout->getPositionSpacing());
                 tabNote->setY(layout->getTabLine(note.getString() + 1) -
@@ -1387,6 +1387,7 @@ void SystemRenderer::drawStdNotation(const System &system, const Staff &staff,
 
     QFont default_font(MusicFont::getFont(MusicFont::DEFAULT_FONT_SIZE));
     QFont grace_font(MusicFont::getFont(MusicFont::GRACE_NOTE_SIZE));
+    QFont finger_font(MusicFont::getFont(MusicFont::FINGER_FONT_SIZE));
     QFontMetricsF default_fm(default_font);
     QFontMetricsF grace_fm(grace_font);
 
@@ -1394,7 +1395,8 @@ void SystemRenderer::drawStdNotation(const System &system, const Staff &staff,
     {
         const QFont *font = note.isGraceNote() ? &grace_font : &default_font;
         const QFontMetricsF *fm = note.isGraceNote() ? &grace_fm : &default_fm;
-
+        const QFont *fingerFont = &finger_font;
+        
         const QChar noteHead = note.getNoteHeadSymbol();
         const double noteHeadWidth = fm->width(noteHead);
 
@@ -1428,6 +1430,39 @@ void SystemRenderer::drawStdNotation(const System &system, const Staff &staff,
             }
         }
 
+        Note::FingerLeft fingerLeft = note.getFingerLeft();
+        if (fingerLeft != Note::FingerLeft::FL_NotSpecified)
+        {
+            QChar flChar;
+            switch (fingerLeft) {
+                case Note::FingerLeft::FL_1:
+                    flChar = QChar('1');
+                    break;
+                case Note::FingerLeft::FL_2:
+                    flChar = QChar('2');
+                    break;
+                case Note::FingerLeft::FL_3:
+                    flChar = QChar('3');
+                    break;
+                case Note::FingerLeft::FL_4:
+                    flChar = QChar('4');
+                    break;
+                case Note::FingerLeft::FL_T:
+                    flChar = QChar('T');
+                    break;
+                default:
+                    break;
+            }
+            
+            if (!group) {
+                group = new QGraphicsItemGroup();
+            }
+            
+            auto flNumText = new SimpleTextItem(flChar, finger_font);
+            flNumText->setPos(0, 10);
+            group->addToGroup(flNumText);
+        }
+        
         if (group)
         {
             group->addToGroup(text);
